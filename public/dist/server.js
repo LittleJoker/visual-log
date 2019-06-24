@@ -200,12 +200,17 @@ var app = (0, _express2.default)(),
     HTML_FILE = _path2.default.join(DIST_DIR, '../../public/index.html'),
     compiler = (0, _webpack2.default)(_webpackDevConfig2.default);
 console.log(HTML_FILE);
+var router = _express2.default.Router();
 
 app.use((0, _webpackDevMiddleware2.default)(compiler, {
   publicPath: _webpackDevConfig2.default.output.publicPath
 }));
 
 app.use((0, _webpackHotMiddleware2.default)(compiler));
+
+app.use(_express2.default.json({
+  type: ['application/json', 'text/plain']
+}));
 
 app.get('/platform/*', function (req, res, next) {
   // console.log(HTML_FILE);
@@ -234,12 +239,17 @@ app.get('/api/select-all', function (req, res, next) {
 });
 
 app.post('/api/query', function (req, res) {
-  if (req.body.data) {
-    var sqlQuery = req.body.data.sql;
+  if (req.params('sql')) {
+    var sqlQuery = req.params('sql');
     _connect2.default.executeQuery(sqlQuery, function (results) {
       res.set('content-type', 'application/json');
       res.send(results);
       res.end();
+    });
+  } else {
+    res.set('content-type', 'application/json');
+    res.send({
+      error: '/api/query post method should have sql string in body'
     });
   }
 });

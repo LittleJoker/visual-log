@@ -13,12 +13,17 @@ const app = express(),
   HTML_FILE = path.join(DIST_DIR, '../../public/index.html'),
   compiler = webpack(config);
   console.log(HTML_FILE);
+const router = express.Router();
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
 
 app.use(webpackHotMiddleware(compiler));
+
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+}));
 
 app.get('/platform/*', (req, res, next) => {
   // console.log(HTML_FILE);
@@ -47,12 +52,17 @@ app.get('/api/select-all', function (req, res, next) {
 });
 
 app.post('/api/query', function ( req, res) {
-  if (req.body.data) {
-    const sqlQuery = req.body.data.sql;
+  if (req.params('sql')) {
+    const sqlQuery = req.params('sql');
     connect.executeQuery(sqlQuery, (results) => {
       res.set('content-type', 'application/json');
       res.send(results);
       res.end();
+    });
+  } else {
+    res.set('content-type', 'application/json');
+    res.send({
+      error: '/api/query post method should have sql string in body'
     });
   }
 });
