@@ -52,8 +52,8 @@ app.get('/api/select-all', function (req, res, next) {
 });
 
 app.post('/api/query', function ( req, res) {
-  if (req.params('sql')) {
-    const sqlQuery = req.params('sql');
+  if (req.body.data.sql) {
+    const sqlQuery = req.body.data.sql;
     connect.executeQuery(sqlQuery, (results) => {
       res.set('content-type', 'application/json');
       res.send(results);

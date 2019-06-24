@@ -12,13 +12,15 @@ export default class RoadMapFlow extends Component {
   }
 
   componentDidMount() {
-    const data = {
-      sql: SQL_SELECT_ALL
+    const body = {
+      data: {
+        sql: SQL_SELECT_ALL
+      }
     };
 
     fetch('/api/query', {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(body)
     })
     .then(res => {
       return res.json()

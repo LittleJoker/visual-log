@@ -239,8 +239,8 @@ app.get('/api/select-all', function (req, res, next) {
 });
 
 app.post('/api/query', function (req, res) {
-  if (req.params('sql')) {
-    var sqlQuery = req.params('sql');
+  if (req.body.data.sql) {
+    var sqlQuery = req.body.data.sql;
     _connect2.default.executeQuery(sqlQuery, function (results) {
       res.set('content-type', 'application/json');
       res.send(results);
