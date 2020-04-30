@@ -6,7 +6,9 @@
     "start": "node ./public/dist/server.js",
     "buildClient": "webpack --mode development --config webpack.dev.config.js",
     "buildDev": "rm -rf dist && webpack --mode development --watch --config webpack.server.config.js && webpack --mode development --watch --config webpack.dev.config.js",
-    "startDev": "npm run buildDev && node ./public/dist/server.js"
+    "startDev": "npm run buildDev && node ./public/dist/server.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "antd": "^3.19.2",
@@ -42,7 +44,8 @@
     "webpack": "^4.32.1",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "babel-loader": "^7.1.5",
@@ -57,5 +60,6 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-standard": "^4.0.0",
     "webpack-cli": "^3.3.2"
-  }
+  },
+  "snyk": true
 }
