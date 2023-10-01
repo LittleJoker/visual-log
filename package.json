@@ -16,7 +16,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "cookie-parser": "~1.4.4",
-    "css-loader": "^2.1.1",
+    "css-loader": "^5.0.0",
     "debug": "~2.6.9",
     "destroy": "^1.0.4",
     "echart": "^0.1.3",
