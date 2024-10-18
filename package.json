@@ -39,7 +39,7 @@
     "react-router-dom": "^5.0.0",
     "require": "^2.4.20",
     "style-loader": "^0.23.1",
-    "webpack": "^4.32.1",
+    "webpack": "^5.0.0",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"
